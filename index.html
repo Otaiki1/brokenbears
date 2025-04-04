@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Bears of Mango Network</title>
+    <style>
+        :root {
+            --dark-bg: #0c0a1d;
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --mango-orange: #ff9e00;
+            --bitcoin-gold: #f7931a;
+            --text-light: #d3d3d3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background-color: rgba(12, 10, 29, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .connect-btn {
+            background: linear-gradient(45deg, var(--mango-orange), var(--bitcoin-gold));
+            color: black;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--mango-orange);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(12, 10, 29, 0.7), rgba(12, 10, 29, 0.9));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--mango-orange);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+        
+        /* Story Section */
+        .story-section {
+            padding: 8rem 2rem;
+            background-color: rgba(20, 16, 40, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('/api/placeholder/800/600');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .terminal {
+            background-color: rgba(10, 10, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 0 30px rgba(5, 217, 232, 0.3);
+            z-index: 1;
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red {
+            background-color: #ff5f56;
+        }
+        
+        .dot-yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .dot-green {
+            background-color: #27c93f;
+        }
+        
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .terminal-content {
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .terminal-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .terminal-prompt::before {
+            content: '> ';
+            color: var(--mango-orange);
+        }
+        
+        /* Collection Preview */
+        .collection-preview {
+            padding: 8rem 0 4rem;
+            background-color: var(--dark-bg);
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bears-gallery {
+            display: flex;
+            overflow-x: auto;
+            padding: 2rem 0;
+            gap: 2rem;
+            margin: 0 2rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .bears-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .bear-card {
+            min-width: 280px;
+            background: linear-gradient(145deg, #14122e, #0a0919);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .bear-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(5, 217, 232, 0.2);
+        }
+        
+        .bear-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .bear-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .bear-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .stat {
+            text-align: left;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .stat-value {
+            font-size: 1rem;
+            color: var(--neon-pink);
+        }
+        
+        /* Roadmap Section */
+        .roadmap-section {
+            padding: 8rem 2rem;
+            background-color: rgba(20, 16, 40, 0.8);
+            position: relative;
+        }
+        
+        .roadmap-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .roadmap-path {
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--mango-orange));
+            margin: 0 auto;
+            position: relative;
+            margin-bottom: 7rem;
+        }
+        
+        .roadmap-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .roadmap-item {
+            text-align: center;
+            position: relative;
+            width: 22%;
+        }
+        
+        .roadmap-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            border: 3px solid;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .roadmap-icon-1 {
+            border-color: var(--neon-blue);
+        }
+        
+        .roadmap-icon-2 {
+            border-color: var(--neon-pink);
+        }
+        
+        .roadmap-icon-3 {
+            border-color: var(--mango-orange);
+        }
+        
+        .roadmap-icon-4 {
+            border-color: var(--bitcoin-gold);
+        }
+        
+        .roadmap-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .roadmap-description {
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        /* Community & Utility Section */
+        .community-section {
+            padding: 8rem 2rem;
+            background-color: var(--dark-bg);
+        }
+        
+        .utility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+        }
+        
+        .utility-card {
+            background: rgba(20, 16, 40, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .utility-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 42, 109, 0.2);
+            border-color: var(--neon-pink);
+        }
+        
+        .utility-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-pink);
+        }
+        
+        .utility-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .utility-description {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-link {
+            width: 180px;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-link {
+            border-color: #7289da;
+        }
+        
+        .discord-link:hover {
+            background-color: #7289da;
+            box-shadow: 0 0 20px #7289da;
+        }
+        
+        .twitter-link {
+            border-color: #1da1f2;
+        }
+        
+        .twitter-link:hover {
+            background-color: #1da1f2;
+            box-shadow: 0 0 20px #1da1f2;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background-color: rgba(8, 6, 15, 0.95);
+            padding: 5rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--neon-pink);
+            padding-left: 5px;
+        }
+        
+        .tech-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .tech-spec {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .spec-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--neon-blue);
+        }
+        
+        .spec-text {
+            color: #aaa;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations & Effects */
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); }
+            14% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); }
+            15% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); }
+            49% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); }
+            50% { text-shadow: 0.025em 0.05em 0 var(--neon-pink), 0.05em 0 0 var(--neon-blue); }
+            99% { text-shadow: 0.025em 0.05em 0 var(--neon-pink), 0.05em 0 0 var(--neon-blue); }
+            100% { text-shadow: -0.025em 0 0 var(--neon-pink), -0.025em -0.025em 0 var(--neon-blue); }
+        }
+        
+        .glitch-effect {
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes floatAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .float {
+            animation: floatAnimation 4s ease-in-out infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .roadmap-items {
+                flex-direction: column;
+                gap: 4rem;
+            }
+            
+            .roadmap-item {
+                width: 100%;
+            }
+            
+            .roadmap-path {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">BROKEN BEARS</div>
+        <div class="nav-links">
+            <a href="#story">Story</a>
+            <a href="#collection">Collection</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#utility">Utility</a>
+        </div>
+        <button class="connect-btn">Connect Wallet</button>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">BROKEN BEARS</h1>
+            <h2 class="hero-subtitle">OF MANGO NETWORK</h2>
+            <p class="hero-description">Survivors of the Digital Wasteland, Connected by Bitcoin, Powered by Mango's Omnichain Technology</p>
+            <button class="cta-button">Mint Now</button>
+        </div>
+    </section>
+    
+    <!-- Story Section -->
+    <section id="story" class="story-section">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="terminal-title">broken_bears_origin.txt</div>
+            </div>
+            <div class="terminal-content">
+                <p class="terminal-prompt">Accessing Mango Network Archives...</p>
+                <p>In the vast expanse of the digital frontier, where blockchains battle for dominance and protocols race to outdo one another, a hidden realm exists—<span style="color: var(--neon-pink);">The Mango Wastelands</span>.</p>
+                <p>Once a thriving hub of decentralized innovation, it was shattered by relentless hacks, exploitations, and the chaos of an unregulated wild west.</p>
+                <p>In the aftermath, only the <span style="color: var(--neon-blue);">Broken Bears</span> remained. These cybernetic teddy bears, once plush companions, became war-weary relics—patched up, sewn back together, surviving on the lifeblood of Bitcoin and Mango's omnichain energy.</p>
+                <p>Their stitches tell stories of resilience, their missing buttons mark battles fought in forgotten mempools, and their IV drips keep them alive in a world where gas fees can drain the soul.</p>
+                <p>Each Broken Bear represents a survivor, an outcast from the old chains, now finding a new home on <span style="color: var(--mango-orange);">Mango Network</span>, where cross-chain technology allows them to move freely, escaping the limitations of outdated infrastructure.</p>
+                <p>No longer bound by a single ecosystem, these bears evolve, adapt, and persist in their quest for a decentralized utopia.</p>
+                <p>But the war isn't over. Some believe the <span style="color: #ff0000;">Corrupted Bears</span>—dark reflections of themselves—are still lurking, waiting for the right moment to exploit Mango's power.</p>
+                <p>Will the Broken Bears rebuild, or will they fall to the same greed and manipulation that shattered their past?</p>
+                <p class="terminal-prompt">Only time will tell...</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Collection Preview -->
+    <section id="collection" class="collection-preview">
+        <h2 class="section-title">THE COLLECTION</h2>
+        <p class="section-subtitle">Each Broken Bear is unique, with different battle scars, cybernetic enhancements, and Bitcoin dependencies. Discover the rarity traits that make your bear special.</p>
+        
+        <div class="bears-gallery">
+            <div class="bear-card">
+                <img src="/api/placeholder/280/280" alt="Cyborg Bear" class="bear-image">
+                <h3 class="bear-name">Cyborg #042</h3>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Rarity</div>
+                        <div class="stat-value">Legendary</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">BTC Drip</div>
+                        <div class="stat-value">High</div>
+                    </div>
+                </div>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Enhancements</div>
+                        <div class="stat-value">Arm, Eye</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Stitches</div>
+                        <div class="stat-value">7</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bear-card">
+                <img src="/api/placeholder/280/280" alt="Wasteland Bear" class="bear-image">
+                <h3 class="bear-name">Wasteland #187</h3>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Rarity</div>
+                        <div class="stat-value">Rare</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">BTC Drip</div>
+                        <div class="stat-value">Medium</div>
+                    </div>
+                </div>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Enhancements</div>
+                        <div class="stat-value">Leg</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Stitches</div>
+                        <div class="stat-value">12</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bear-card">
+                <img src="/api/placeholder/280/280" alt="Neon Bear" class="bear-image">
+                <h3 class="bear-name">Neon #309</h3>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Rarity</div>
+                        <div class="stat-value">Epic</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">BTC Drip</div>
+                        <div class="stat-value">Critical</div>
+                    </div>
+                </div>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Enhancements</div>
+                        <div class="stat-value">Full Body</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Stitches</div>
+                        <div class="stat-value">3</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bear-card">
+                <img src="/api/placeholder/280/280" alt="Patched Bear" class="bear-image">
+                <h3 class="bear-name">Patched #576</h3>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Rarity</div>
+                        <div class="stat-value">Common</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">BTC Drip</div>
+                        <div class="stat-value">Low</div>
+                    </div>
+                </div>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Enhancements</div>
+                        <div class="stat-value">None</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Stitches</div>
+                        <div class="stat-value">21</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bear-card">
+                <img src="/api/placeholder/280/280" alt="Glitch Bear" class="bear-image">
+                <h3 class="bear-name">Glitch #001</h3>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Rarity</div>
+                        <div class="stat-value">Mythic</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">BTC Drip</div>
+                        <div class="stat-value">Infinite</div>
+                    </div>
+                </div>
+                <div class="bear-stats">
+                    <div class="stat">
+                        <div class="stat-label">Enhancements</div>
+                        <div class="stat-value">Core</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Stitches</div>
+                        <div class="stat-value">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="roadmap-section">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 5rem;">ROADMAP</h2>
+        
+        <div class="roadmap-container">
+            <div class="roadmap-path"></div>
+            <div class="roadmap-items">
+                <div class="roadmap-item">
+                    <div class="roadmap-icon roadmap-icon-1 float">
+                        <div style="font-size: 2rem; color: var(--neon-blue);">1</div>
+                    </div>
+                    <h3 class="roadmap-title">Genesis Drop</h3>
+                    <p class="roadmap-description">Launch of 5,000 unique Broken Bears NFTs, each with different traits, scars, and Bitcoin dependencies.</p>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-icon roadmap-icon-2 float">
+                        <div style="font-size: 2rem; color: var(--neon-pink);">2</div>
+                    </div>
+                    <h3 class="roadmap-title">Cross-Chain Migration</h3>
+                    <p class="roadmap-description">Implementing Mango Network's om
